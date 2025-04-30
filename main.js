@@ -12,27 +12,26 @@ http.createServer((req, res) => {
       res.writeHead(200, {
         'content-type': 'text/plain',
       })
-      return res.end('unknown request')
+      return res.end('不重要的请求')
   }
 }).listen(8866, () => {
   console.log('Server is running at http://localhost:8866')
 })
 
 function write_event_stream(res) {
-  let index = 0
   res.writeHead(200, {
     'content-type': 'text/event-stream', // !!! 关键就是这里
   })
+  let index = 0
   const time_id = setInterval(() => {
     if (index > 10) {
       clearInterval(time_id)
-      res.end()
+      res.end('over\n')
       return
+    } else {
+      res.write(index + ' some string\n')
+      index++
     }
-
-    res.write(index + ' data\n')
-
-    index++
   }, 1000)
 }
 

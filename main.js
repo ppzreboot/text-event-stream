@@ -27,7 +27,6 @@ function write_event_stream(res) {
     if (index > 10) {
       clearInterval(time_id)
       res.end('over\n')
-      return
     } else {
       res.write(index + ' some string\n')
       index++

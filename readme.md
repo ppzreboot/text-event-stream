@@ -7,6 +7,7 @@
 我猜你肯定用过 ChatGPT 或腾讯元宝之类的 AI 工具。
 
 问*问题*时，腾讯元宝会把*回答*分成一小片、一小片的，
+看起来像断断续续传给前端，
 就像在试卷上写答案时一样。
 
 这并不是什么高深的技术，只是一个 http 响应头：
@@ -17,12 +18,6 @@
 ```
 
 这个仓库的代码，就是演示这个响应头的用法。
-
-> [!IMPORTANT]
-> 某些条件下，有两种情况会使 text/event-stream 失效:
-> 1. 服务端使用 nginx 做反向代理
-> 2. 客户端使用 vpn
-> 但这都是可以解决的，具体解决办法可以咨询 ChatGPT 或腾讯元宝。
 
 ## 使用方法
 
@@ -38,3 +33,19 @@ node main.js
 
 + 打开浏览器访问：http://127.0.0.1/
 + 打开控制台，注意 `console.log`
+
+## 异常
+
+##### 反向代理（以 nginx 为例）
+
+服务端使用 nginx（或其他服务器）做反向代理时，需配置（在恰当的位置）：
+
+``` nginx
+server {
+  location /xxx {
+    proxy_buffering off;
+    chunked_transfer_encoding on;
+    proxy_pass http://xxxx.yyy/;
+  }
+}
+```

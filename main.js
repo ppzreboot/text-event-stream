@@ -38,33 +38,24 @@ function write_event_stream(res) {
 
 function write_webpage(res) {
   res.end(`
-    <!DOCTYPE html>
-    <html lang="zh-CN">
-      <head>
-        <meta charset="UTF-8">
-        <title>DEMO | text/event-stream</title>
-      </head>
-      <body>
-        <script>
-          fetch('/abc').then(response => {
-            const reader = response.body.getReader()
-            const decoder = new TextDecoder('utf-8')
-            read() // 递归
+    <script>
+      fetch('/abc').then(response => {
+        const reader = response.body.getReader()
+        const decoder = new TextDecoder('utf-8')
+        read() // 递归
 
-            function read() {
-              reader.read().then(({ done, value }) => {
-                if (done) {
-                  console.log('Stream finished')
-                  return
-                }
-                const text = decoder.decode(value, { stream: true })
-                console.log(text)
-                read()
-              })
+        function read() {
+          reader.read().then(({ done, value }) => {
+            if (done) {
+              console.log('Stream finished')
+              return
             }
+            const text = decoder.decode(value, { stream: true })
+            console.log(text)
+            read()
           })
-        </script>
-      </body>
-    </html>
+        }
+      })
+    </script>
   `)
 }

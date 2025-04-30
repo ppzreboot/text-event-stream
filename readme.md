@@ -7,13 +7,13 @@
 我猜你肯定用过 ChatGPT 或腾讯元宝之类的 AI 工具。
 
 问*问题*时，腾讯元宝会把*回答*分成一小片、一小片的，
-看起来像断断续续传给前端，
+看起来是断断续续，
 就像在试卷上写答案时一样。
 
 这并不是什么高深的技术，只是一个 http 响应头：
 ``` json
 {
-  "Content-Type": "text/event-stream"
+  "content-type": "text/event-stream"
 }
 ```
 

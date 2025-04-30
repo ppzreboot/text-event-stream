@@ -9,10 +9,10 @@ http.createServer((req, res) => {
       // 接口
       return write_event_stream(res)
     default:
-      res.writeHead(404, {
+      res.writeHead(200, {
         'content-type': 'text/plain',
       })
-      return res.end('404 Not Found')
+      return res.end('unknown request')
   }
 }).listen(8866, () => {
   console.log('Server is running at http://localhost:8866')

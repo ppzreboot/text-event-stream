@@ -24,7 +24,7 @@
 ##### 1. 下载源码、并运行
 
 ``` bash
-git@github.com:ppzreboot/text-event-stream.git
+git clone git@github.com:ppzreboot/text-event-stream.git
 cd text-event-stream
 node main.js
 ```
